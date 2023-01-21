@@ -1,11 +1,13 @@
 @extends('layouts.app')
 @section('content')
 
-<h2>{{$users}}</h2>
+{{-- <h2>{{$users}}</h2> --}}
 <div class="container justify-content center">
     <div class="m4-4 card">
       <div class="card-body bg-white">
-        <h1> USER INDEX</h1>
+          <h1> USER INDEX  <a href="{{route('users.create')}}"class="btn btn-success"style="float: right;">Create User</a>  </h1>
+
+         
 <table class="table">
     <thead>
       <tr>
@@ -22,6 +24,13 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->created_at}}</td>
+                <td>
+                  <a  href="{{route('users.edit',['id'=>$user->id])}}" class="btn btn-info">Edit</a>
+                  <form method="POST" action="{{route('users.destroy',['id'=>$user->id])}}" style="display: inline">
+                      @csrf
+                      <button type="submit" class="btn btn-danger">Delete</button> 
+                  </form>
+                </td>
             </tr>
         @endforeach
     </tbody>
